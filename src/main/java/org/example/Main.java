@@ -29,26 +29,31 @@ public class Main {
         searchBar.clear();
         searchBar.sendKeys(searchQuery + Keys.ENTER);
 
-        List<String> resultList = new ArrayList<>();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//article[contains(@id, 'r1-')]")));
+        List<WebElement> searchResults = driver.findElements(By.xpath("//article[contains(@id, 'r1-')]"));
+//        for (WebElement result : searchResults) {
+//            resultList.add(result.getText() + "\n" + "_______________________");
+//        }
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//article[contains(@id, 'r1-'")));
-        List<WebElement> searchResults = driver.findElements(By.xpath("//article"));
-        for (WebElement result : searchResults) {
-            resultList.add(result.getText() + "\n" + "_______________________");
-        }
-
+        List<String> resultsList = searchResults.stream()
+                .map(WebElement::getText)
+                .map(address -> address.replace(" › ", "/"))
+                .map(text -> "\n" + text + "\n__________")
+                .toList();
 
 //        WebElement nextPage = driver.findElement(By.xpath("//button[@id='more-results']"));
 //        nextPage.click();
 
-
-        if (resultList.isEmpty()) {
-            System.out.println("result list is empty");
+// check if file is already exists?
+        if (resultsList.isEmpty()) {
+            System.out.println("No results found!");
         } else {
+
+
             Path resultsFile = Path.of(searchQuery.replaceAll("[^a-zA-Z0-9]", "_") + ".txt");
             try {
                 Files.createFile(resultsFile);
-                Files.write(resultsFile, resultList);
+                Files.write(resultsFile, resultsList);
             } catch (IOException e) {
                 System.out.println("Error " + e.getMessage());
                 System.out.println("No results!");
