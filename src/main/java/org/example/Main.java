@@ -38,17 +38,18 @@ public class Main {
         List<String> resultsList = searchResults.stream()
                 .map(WebElement::getText)
                 .map(address -> address.replace(" › ", "/"))
-                .map(text -> "\n" + text + "\n__________")
+                .map(text -> text + "\n__________\n")
                 .toList();
 
 //        WebElement nextPage = driver.findElement(By.xpath("//button[@id='more-results']"));
 //        nextPage.click();
 
-// check if file is already exists?
+
         if (resultsList.isEmpty()) {
             System.out.println("No results found!");
         } else {
-
+            System.out.println("Results in total: " + resultsList.size());
+            resultsList.forEach(System.out::println);
 
             Path resultsFile = Path.of(searchQuery.replaceAll("[^a-zA-Z0-9]", "_") + ".txt");
             try {
