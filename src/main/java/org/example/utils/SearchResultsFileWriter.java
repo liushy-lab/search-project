@@ -8,36 +8,47 @@ import java.util.Scanner;
 
 public class SearchResultsFileWriter {
 
-//    choose path for file
-//    public static void chooseResultFileDirectory() {
-//        System.out.println("Input directory to save file: ");
-//        String writePath = new Scanner(System.in).nextLine();
-//    }
+    private static Path resultDir;
 
+//    choose path for file
+    public static void chooseResultFileDirectory() {
+        System.out.println("Input directory to save file: ");
+        String writePath = new Scanner(System.in).nextLine();
+    }
 
     public static Path setValidFileName(String fileName) {
         return Path.of(fileName.replaceAll("[^a-zA-Z0-9]", "_") + ".txt");
     }
 
-    public static Path createDirectory(Path path) throws IOException {
-        if (Files.exists(path)) {
-            if (Files.isDirectory(path)) {
-                System.out.println("Directory already exists!");
-            } else {
-                System.out.println("The path exists but it's not a directory!");
+    public static Path getResultDir() throws IOException {
+        if (resultDir == null) {
+            Path resultDir = Path.of("results");
+            if (!Files.exists(resultDir)) {
+                Files.createDirectory(resultDir);
             }
         }
-        return Files.createDirectory((path));
+        return resultDir;
+    }
+
+    public static Path createDirectory() throws IOException {
+        if (Files.exists(resultDir)) {
+            if (Files.isDirectory(resultDir)) {
+                System.out.println("Directory already exists!");
+            } else {
+                Files.createDirectory((resultDir));
+            }
+        } return resultDir;
     }
 
     public static void createResultFile(String fileName, List<String> searchResults) {
-        Path results = setValidFileName(fileName);
-
         try {
-            Files.createFile(results);
-            Files.write(results, searchResults);
+        Path directory = getResultDir();
+        Path directoryWithFile = directory.resolve(setValidFileName(fileName));
+
+            Files.createFile(directoryWithFile);
+            Files.write(directoryWithFile, searchResults);
         } catch (IOException e) {
-            System.out.println("Error " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
             System.out.println("No results!");
         }
     }
