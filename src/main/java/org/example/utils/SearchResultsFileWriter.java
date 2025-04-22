@@ -8,25 +8,29 @@ import java.util.Scanner;
 
 public class SearchResultsFileWriter {
 
-
 //    choose path for file
 //    public static void chooseResultFileDirectory() {
 //        System.out.println("Input directory to save file: ");
 //        String writePath = new Scanner(System.in).nextLine();
 //    }
 
-//    make a correct name for file
+
     public static Path setValidFileName(String fileName) {
         return Path.of(fileName.replaceAll("[^a-zA-Z0-9]", "_") + ".txt");
     }
 
-//    create a file
-//    public Path createFile(String fileName) {
-//        if ()
-//    }
+    public static Path createDirectory(Path path) throws IOException {
+        if (Files.exists(path)) {
+            if (Files.isDirectory(path)) {
+                System.out.println("Directory already exists!");
+            } else {
+                System.out.println("The path exists but it's not a directory!");
+            }
+        }
+        return Files.createDirectory((path));
+    }
 
-//    save file
-    public static Path createFile(String fileName, List<String> searchResults) {
+    public static void createResultFile(String fileName, List<String> searchResults) {
         Path results = setValidFileName(fileName);
 
         try {
@@ -37,5 +41,5 @@ public class SearchResultsFileWriter {
             System.out.println("No results!");
         }
     }
-
 }
+
