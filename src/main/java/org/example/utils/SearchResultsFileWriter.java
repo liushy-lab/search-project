@@ -11,10 +11,10 @@ public class SearchResultsFileWriter {
     private static Path resultDir;
 
 //    choose path for file
-    public static void chooseResultFileDirectory() {
-        System.out.println("Input directory to save file: ");
-        String writePath = new Scanner(System.in).nextLine();
-    }
+//    public static void chooseResultFileDirectory() {
+//        System.out.println("Input directory to save file: ");
+//        String writePath = new Scanner(System.in).nextLine();
+//    }
 
     public static Path setValidFileName(String fileName) {
         return Path.of(fileName.replaceAll("[^a-zA-Z0-9]", "_") + ".txt");
@@ -22,14 +22,15 @@ public class SearchResultsFileWriter {
 
     public static Path getResultDir() throws IOException {
         if (resultDir == null) {
-            Path resultDir = Path.of("results");
+            resultDir = Path.of("results");
             if (!Files.exists(resultDir)) {
-                Files.createDirectory(resultDir);
+                Files.createDirectories(resultDir);
             }
         }
         return resultDir;
     }
 
+    /*
     public static Path createDirectory() throws IOException {
         if (Files.exists(resultDir)) {
             if (Files.isDirectory(resultDir)) {
@@ -39,6 +40,8 @@ public class SearchResultsFileWriter {
             }
         } return resultDir;
     }
+    */
+
 
     public static void createResultFile(String fileName, List<String> searchResults) {
         try {
