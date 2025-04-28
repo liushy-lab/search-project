@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 public class ConsolePrinter {
 
-    public static String askRequest() {
+    public static String askRequest(Scanner scanner) {
         System.out.println("Input your query" + "\n");
-        return new Scanner(System.in).nextLine();
+        return scanner.nextLine();
     }
 
     public static void printResults(List<String> resultList) {
