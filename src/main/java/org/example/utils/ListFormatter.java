@@ -13,7 +13,18 @@ import java.util.Scanner;
 
 public class ListFormatter {
 
+    public List<String> getFormattedResultList (String searchQuery, List<WebElement> resultList) {
 
+    }
+
+    public List<String> formatResultList (String query, List<WebElement> resultList) {
+        return resultList.stream()
+                .map(WebElement::getText)
+                .filter(request -> request.contains(query))
+                .map(address -> address.replace(" › ", "/"))
+                .map(text -> text + chooseSeparator())
+                .toList();
+    }
 
     public String chooseSeparator() {
         System.out.println("Which separator would you prefer:\n" +
