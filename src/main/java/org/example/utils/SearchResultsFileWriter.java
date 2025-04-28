@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Scanner;
 
 public class SearchResultsFileWriter {
 
@@ -36,6 +35,7 @@ public class SearchResultsFileWriter {
 
             Files.createFile(resultFile);
             Files.write(resultFile, searchResults);
+            System.out.println("Result file created");
 
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());

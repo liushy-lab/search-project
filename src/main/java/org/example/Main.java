@@ -1,28 +1,56 @@
 package org.example;
 
+import org.example.drivers.WebDriverSingleton;
+import org.example.pages.DuckDuckGoPage;
+import org.example.pages.GooglePage;
+import org.example.pages.YandexPage;
+import org.example.utils.ConsolePrinter;
+import org.example.utils.ResultListFormatter;
+import org.example.utils.SearchResultsFileWriter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.example.utils.SearchResultsFileWriter;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    private static WebDriver driver;
+    private static WebDriverWait wait;
+    private static DuckDuckGoPage duckDuckGoPage;
+    private static GooglePage googlePage;
+    private static YandexPage yandexPage;
 
-        System.out.println("Input your query");
-        String searchQuery = new Scanner(System.in).nextLine();
+    public static void main(String[] args) {
 
-        WebDriver driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        driver = WebDriverSingleton.getDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        duckDuckGoPage = new DuckDuckGoPage(driver);
+        googlePage = new GooglePage(driver);
+        yandexPage = new YandexPage(driver);
 
+        Scanner scanner = new Scanner(System.in);
+
+        String searchQuery = ConsolePrinter.askRequest(scanner);
+        ResultListFormatter.chooseSeparator();
+
+        duckDuckGoPage.doSearch(searchQuery);
+        List<WebElement> resultList = duckDuckGoPage.getSearchResults();
+
+        List<String> formattedList = ResultListFormatter.formatResultList(searchQuery, resultList);
+
+        SearchResultsFileWriter.createResultFile(searchQuery, formattedList);
+
+        ConsolePrinter.printResults(formattedList);
+
+        WebDriverSingleton.quitDriver();
+    }
+}
+
+        /*
         driver.get("https://duckduckgo.com/");
 
         WebElement searchBar = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@name='q']")));
@@ -56,18 +84,7 @@ public class Main {
             SearchResultsFileWriter.createResultFile(searchQuery, resultsList);
             SearchResultsFileWriter.getResultDir();
 
-            /*
-            Path resultsFile = Path.of(searchQuery.replaceAll("[^a-zA-Z0-9]", "_") + ".txt");
-            try {
-                Files.createFile(resultsFile);
-                Files.write(resultsFile, resultsList);
-            } catch (IOException e) {
-                System.out.println("Error " + e.getMessage());
-                System.out.println("No results!");
-            }
-            */
-
             driver.quit();
         }
     }
-}
+         */

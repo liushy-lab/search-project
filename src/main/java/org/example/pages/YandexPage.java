@@ -2,6 +2,7 @@ package org.example.pages;
 
 import org.example.drivers.WebDriverSingleton;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,16 +13,16 @@ public class YandexPage {
     WebDriver driver;
     WebDriverWait wait;
 
-    String homePage = "https://yandex.com";
+    private static final String HOME_PAGE = "https://yandex.com/";
 
     @FindBy(xpath = "//input[@name='text']")
-    private WebDriver searchBar;
+    private WebElement searchBar;
 
     @FindBy(xpath = "//li[contains(@class, 'serp-item')]")
-    private WebDriver searchResult;
+    private WebElement searchResult;
 
     @FindBy(xpath = "//a[contains(@class, 'Pager-Item_type_next')]")
-    private WebDriver nextPage;
+    private WebElement nextPage;
 
     public YandexPage(WebDriver driver) {
         this.driver = WebDriverSingleton.getDriver();

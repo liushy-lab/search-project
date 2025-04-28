@@ -1,35 +1,31 @@
 package org.example.utils;
 
-import org.example.pages.DuckDuckGoPage;
-import org.example.pages.GooglePage;
-import org.example.pages.YandexPage;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class ListFormatter {
+public class ResultListFormatter {
 
-    public List<String> getFormattedResultList (String searchQuery, List<WebElement> resultList) {
+//    public static List<String> getFormattedResultList(String searchQuery, List<WebElement> resultList) {
+//        return getFormattedResultList()
+//    }
 
-    }
+    public static List<String> formatResultList(String query, List<WebElement> resultList) {
+        String separator = chooseSeparator();
 
-    public List<String> formatResultList (String query, List<WebElement> resultList) {
         return resultList.stream()
                 .map(WebElement::getText)
                 .filter(request -> request.contains(query))
                 .map(address -> address.replace(" › ", "/"))
-                .map(text -> text + chooseSeparator())
+                .map(text -> text + separator)
                 .toList();
     }
 
-    public String chooseSeparator() {
-        System.out.println("Which separator would you prefer:\n" +
+    public static String chooseSeparator() {
+        System.out.println("What would you prefer seeing:\n" +
                 "star\n" +
-                "plato\n" +
+                "plain\n" +
                 "wave\n");
 
         String separator = new Scanner(System.in).nextLine().toLowerCase();
