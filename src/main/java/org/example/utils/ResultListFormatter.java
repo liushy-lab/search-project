@@ -7,10 +7,6 @@ import java.util.Scanner;
 
 public class ResultListFormatter {
 
-//    public static List<String> getFormattedResultList(String searchQuery, List<WebElement> resultList) {
-//        return getFormattedResultList()
-//    }
-
     public static List<String> formatResultList(String query, List<WebElement> resultList) {
         String separator = chooseSeparator();
 
@@ -23,7 +19,7 @@ public class ResultListFormatter {
     }
 
     public static String chooseSeparator() {
-        System.out.println("What would you prefer seeing:\n" +
+        System.out.println("Which one would you prefer:\n" +
                 "star\n" +
                 "plain\n" +
                 "wave\n");

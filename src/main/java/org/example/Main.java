@@ -35,7 +35,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         String searchQuery = ConsolePrinter.askRequest(scanner);
-        ResultListFormatter.chooseSeparator();
 
         duckDuckGoPage.doSearch(searchQuery);
         List<WebElement> resultList = duckDuckGoPage.getSearchResults();

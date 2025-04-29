@@ -14,7 +14,7 @@ public class ConsolePrinter {
         if (resultList.isEmpty()) {
             System.out.println("No results found!");
         } else {
-            System.out.println("Results in total: " + resultList.size());
+            System.out.print("Results in total: " + resultList.size());
             resultList.forEach(System.out::println);
         }
     }
