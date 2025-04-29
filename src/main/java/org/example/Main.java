@@ -33,16 +33,14 @@ public class Main {
         yandexPage = new YandexPage(driver);
 
         Scanner scanner = new Scanner(System.in);
-
         String searchQuery = ConsolePrinter.askRequest(scanner);
 
         duckDuckGoPage.doSearch(searchQuery);
-        List<WebElement> resultList = duckDuckGoPage.getSearchResults();
 
+        List<WebElement> resultList = duckDuckGoPage.getSearchResults();
         List<String> formattedList = ResultListFormatter.formatResultList(searchQuery, resultList);
 
         SearchResultsFileWriter.createResultFile(searchQuery, formattedList);
-
         ConsolePrinter.printResults(formattedList);
 
         WebDriverSingleton.quitDriver();
@@ -59,10 +57,6 @@ public class Main {
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//article[contains(@id, 'r1-')]")));
         List<WebElement> searchResults = driver.findElements(By.xpath("//article[contains(@id, 'r1-')]"));
-//        ArrayList<String> resultsList = new ArrayList<>();
-//        for (WebElement result : searchResults) {
-//            resultList.add(result.getText() + "\n" + "_______________________");
-//        }
 
         List<String> resultsList = searchResults.stream()
                 .map(WebElement::getText)
@@ -70,9 +64,6 @@ public class Main {
                 .map(address -> address.replace(" › ", "/"))
                 .map(text -> text + "\n__________\n")
                 .toList();
-
-//        WebElement nextPage = driver.findElement(By.xpath("//button[@id='more-results']"));
-//        nextPage.click();
 
         if (resultsList.isEmpty()) {
             System.out.println("No results found!");
