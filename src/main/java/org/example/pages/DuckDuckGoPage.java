@@ -5,7 +5,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -52,6 +51,7 @@ public class DuckDuckGoPage {
         actions.click(nextPageButton).perform();
     }
 
+//  may fail to scroll to the last page
     public List<WebElement> getAllResults() {
 
         List<WebElement> list = new ArrayList<>();

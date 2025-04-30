@@ -46,6 +46,7 @@ public class YandexPage {
         actions.click(nextPageButton).perform();
     }
 
+    //  may fail to scroll to the last page
     public List<WebElement> getAllResults() {
 
         List<WebElement> list = new ArrayList<>();
