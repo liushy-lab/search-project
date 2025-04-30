@@ -17,6 +17,7 @@ public class SearchResultsFileWriter {
         return Path.of(fileName.replaceAll("[^a-zA-Z0-9]", "_") + "_" + timestamp + ".txt");
     }
 
+    //  how to set your own dir? getProperty(user.home)?
     public static Path getResultDir() throws IOException {
         if (resultDir == null) {
             resultDir = Path.of("results");

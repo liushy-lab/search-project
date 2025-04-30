@@ -10,6 +10,7 @@ public class ResultListFormatter {
     public static List<String> formatResultList(String query, List<WebElement> resultList) {
         String separator = chooseSeparator();
 
+        // make description smaller, mb filter by smth more relevant?
         return resultList.stream()
                 .map(WebElement::getText)
                 .filter(request -> request.contains(query))
