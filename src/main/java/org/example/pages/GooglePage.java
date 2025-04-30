@@ -20,12 +20,12 @@ public class GooglePage {
     private WebElement searchBar;
 
     @FindBy(xpath = "//div[@class='MjjYud']")
-    private WebElement searchResult;
+    private WebElement searchResults;
 
     @FindBy(xpath = "//td[@class='NKTSme']")
-    private WebElement nextPage;
+    private WebElement nextPageButton;
 
-    public GooglePage(WebDriver driver) {
+    public GooglePage() {
     this.driver = WebDriverSingleton.getDriver();
     this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         PageFactory.initElements(driver, this);

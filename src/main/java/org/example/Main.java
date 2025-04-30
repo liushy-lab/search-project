@@ -8,11 +8,8 @@ import org.example.utils.ConsolePrinter;
 import org.example.utils.ResultListFormatter;
 import org.example.utils.SearchResultsFileWriter;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Scanner;
@@ -28,16 +25,16 @@ public class Main {
 
         driver = WebDriverSingleton.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        duckDuckGoPage = new DuckDuckGoPage(driver);
-        googlePage = new GooglePage(driver);
-        yandexPage = new YandexPage(driver);
+        duckDuckGoPage = new DuckDuckGoPage();
+        googlePage = new GooglePage();
+        yandexPage = new YandexPage();
 
         Scanner scanner = new Scanner(System.in);
         String searchQuery = ConsolePrinter.askRequest(scanner);
 
         duckDuckGoPage.doSearch(searchQuery);
 
-        List<WebElement> resultList = duckDuckGoPage.getSearchResults();
+        List<WebElement> resultList = duckDuckGoPage.getAllResults();
         List<String> formattedList = ResultListFormatter.formatResultList(searchQuery, resultList);
 
         SearchResultsFileWriter.createResultFile(searchQuery, formattedList);

@@ -30,8 +30,8 @@ public class SearchResultsFileWriter {
     public static void createResultFile(String fileName, List<String> searchResults) {
         try {
 
-        Path directory = getResultDir();
-        Path resultFile = directory.resolve(setValidFileName(fileName));
+            Path directory = getResultDir();
+            Path resultFile = directory.resolve(setValidFileName(fileName));
 
             Files.createFile(resultFile);
             Files.write(resultFile, searchResults);
@@ -44,13 +44,14 @@ public class SearchResultsFileWriter {
     }
 }
 
-//    choose path for file
-//    public static void chooseResultFileDirectory() {
-//        System.out.println("Input directory to save file: ");
-//        String writePath = new Scanner(System.in).nextLine();
-//    }
-
 /*
+        choose path for file
+        public static void chooseResultFileDirectory() {
+        System.out.println("Input directory to save file: ");
+        String writePath = new Scanner(System.in).nextLine();
+    }
+
+
     public static Path createDirectory() throws IOException {
         if (Files.exists(resultDir)) {
             if (Files.isDirectory(resultDir)) {
@@ -60,4 +61,4 @@ public class SearchResultsFileWriter {
             }
         } return resultDir;
     }
-    */
+*/

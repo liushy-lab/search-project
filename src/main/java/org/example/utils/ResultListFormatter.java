@@ -19,22 +19,22 @@ public class ResultListFormatter {
     }
 
     public static String chooseSeparator() {
-        System.out.println("Which one would you prefer:\n" +
-                "star\n" +
-                "plain\n" +
-                "wave\n");
+        System.out.println("Which one would you prefer?\n" +
+                "* star\n" +
+                "_ plain\n" +
+                "~ wave");
 
         String separator = new Scanner(System.in).nextLine().toLowerCase();
 
         switch (separator) {
             case "1", "star", "asterisk":
-                return "\n**********\n";
+                return "\n**********";
             case "2", "plain", "underscore":
-                return "\n__________\n";
+                return "\n__________";
             case "3", "wave", "tilda":
-                return "\n~~~~~~~~~~\n";
+                return "\n~~~~~~~~~~";
             default:
-                return "\n__________\n";
+                return "\n__________";
         }
     }
 }

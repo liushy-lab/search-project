@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class ConsolePrinter {
 
     public static String askRequest(Scanner scanner) {
-        System.out.println("Input your query" + "\n");
+        System.out.println("Input your query");
         return scanner.nextLine();
     }
 
@@ -14,7 +14,7 @@ public class ConsolePrinter {
         if (resultList.isEmpty()) {
             System.out.println("No results found!");
         } else {
-            System.out.print("Results in total: " + resultList.size());
+            System.out.println("Results in total: " + resultList.size());
             resultList.forEach(System.out::println);
         }
     }
