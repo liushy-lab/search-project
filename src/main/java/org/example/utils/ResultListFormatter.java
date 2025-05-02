@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class ResultListFormatter {
 
+    static Scanner scanner = new Scanner(System.in);
+
     public static List<String> formatResultList(String query, List<WebElement> resultList) {
         String separator = chooseSeparator();
 
@@ -25,17 +27,38 @@ public class ResultListFormatter {
                 "_ plain\n" +
                 "~ wave");
 
-        String separator = new Scanner(System.in).nextLine().toLowerCase();
+        String separator = scanner.nextLine().toLowerCase();
 
         switch (separator) {
             case "1", "star", "asterisk":
-                return "\n**********";
+                return "*";
             case "2", "plain", "underscore":
-                return "\n__________";
+                return "_";
             case "3", "wave", "tilda":
-                return "\n~~~~~~~~~~";
+                return "~";
             default:
-                return "\n__________";
+                return "_";
         }
     }
+
+    public static int chooseAmountOfSeparators() {
+        System.out.println("How many symbols you want?");
+        int amount = Integer.parseInt(scanner.nextLine());
+
+        while (true) {
+            if (amount <= 50) {
+                return amount;
+            }
+            System.out.println("Your number should be between 1 and 50! Try again:");
+        }
+    }
+
+    public static String printOutSeparator() {
+
+        String separator = chooseSeparator();
+        int amount = chooseAmountOfSeparators();
+
+        return separator.repeat(amount);
+    }
 }
+
