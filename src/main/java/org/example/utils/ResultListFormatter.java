@@ -2,7 +2,9 @@ package org.example.utils;
 
 import org.openqa.selenium.WebElement;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ResultListFormatter {
@@ -10,19 +12,20 @@ public class ResultListFormatter {
     static Scanner scanner = new Scanner(System.in);
 
     public static List<String> formatResultList(String query, List<WebElement> resultList) {
-        String separator = chooseSeparator();
+        String separator = printOutSeparator();
 
         // make description smaller, mb filter by smth more relevant?
         return resultList.stream()
                 .map(WebElement::getText)
                 .filter(request -> request.contains(query))
                 .map(address -> address.replace(" › ", "/"))
-                .map(text -> text + separator)
+                .map(text -> text + "\n" + separator)
                 .toList();
     }
 
-    public static String chooseSeparator() {
-        System.out.println("Which one would you prefer?\n" +
+    //  can add a text block
+    private static String chooseSeparator() {
+        System.out.println("Which separator would you prefer?\n" +
                 "* star\n" +
                 "_ plain\n" +
                 "~ wave");
@@ -41,7 +44,7 @@ public class ResultListFormatter {
         }
     }
 
-    public static int chooseAmountOfSeparators() {
+    private static int chooseAmountOfSeparators() {
         System.out.println("How many symbols you want?");
         int amount = Integer.parseInt(scanner.nextLine());
 
@@ -49,11 +52,11 @@ public class ResultListFormatter {
             if (amount <= 50) {
                 return amount;
             }
-            System.out.println("Your number should be between 1 and 50! Try again:");
+            System.out.println("Your number should be between 0 and 50! Try again:");
         }
     }
 
-    public static String printOutSeparator() {
+    private static String printOutSeparator() {
 
         String separator = chooseSeparator();
         int amount = chooseAmountOfSeparators();
